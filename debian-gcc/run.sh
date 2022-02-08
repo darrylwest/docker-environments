@@ -13,7 +13,6 @@ export VSN=$(cat version)
 docker run --name debian-gcc \
     -it \
     --detach \
-    --workdir /home/coder/project \
     -p 5050:8080 \
     "$IMAGE:$VSN"
 
