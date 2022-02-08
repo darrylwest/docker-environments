@@ -12,17 +12,7 @@ export BUILD=$( date +"%s" )
 
 [ -d workspace ] || mkdir workspace
 
-# install the utils...
-(
-  /bin/rm -fr workspace
-  mkdir workspace
-  cd workspace
-  git clone git@gitlab.com:darrylwest/cpp-utils.git
-  git clone git@gitlab.com:darrylwest/cpp-sandbox.git
-  git clone https://github.com/fmtlib/fmt.git
-)
-
-tar czvf install.tgz root etc usr workspace
+tar czvf install.tgz home etc usr
 
 IMAGE=${DOCKER_REPO}/debian-gcc
 
@@ -30,8 +20,7 @@ docker build  \
   -t $IMAGE:$VERSION-$BUILD \
   -t $IMAGE:latest . \
   && docker push $IMAGE:$VERSION-$BUILD \
-  && echo "$VERSION-$BUILD" > version
+  && echo "$VERSION-$BUILD" > version \
+  && printf "\nSuccessfully built version $VERSION-$BUILD\n"
 
-printf "\nSuccessfully built version $VERSION-$BUILD\n"
 
-exit 0

@@ -4,6 +4,9 @@
 #
 
 set -o vi
+export EDITOR=vi
+
+PS1='\033[01;32m\]c++ coder:\033[00m🪲  '
 
 alias hi='history'
 alias rm='/bin/rm -i'
@@ -23,4 +26,4 @@ alias gac='git add . ; git commit -v'
 alias gpull='git pull'
 alias gpush='git push'
 
-cat /etc/motd
+cat ~/.motd

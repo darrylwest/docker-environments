@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# dpw@Darryls-iMac.localdomain
+# 2022-02-08 18:51:07
+#
+
+set -eu
+
+function install() {
+  cd ~/
+  mkdir -p ~/c-projects
+  cd ~/c-projects
+
+  git clone git@gitlab.com:darrylwest/cpp-utils.git
+  git clone git@gitlab.com:darrylwest/cpp-sandbox.git
+  git clone https://github.com/fmtlib/fmt.git
+}
+
+install
+
+exit $?
+

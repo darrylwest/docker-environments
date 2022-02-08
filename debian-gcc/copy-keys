@@ -7,12 +7,14 @@ set -eu
 
 export container=debian-gcc
 
+export home=/home/coder
+
 if docker ps | fgrep $container > /dev/null
 then
   printf "copy local ssh keys to $container...\n"
-  docker cp ~/.ssh/id_rsa $container:/root/.ssh/id_rsa
-  docker cp ~/.ssh/id_rsa.pub $container:/root/.ssh/id_rsa.pub
-  docker cp ~/.gitconfig $container:/root/.gitconfig
+  docker cp ~/.ssh/id_rsa $container:$home/.ssh/id_rsa
+  docker cp ~/.ssh/id_rsa.pub $container:$home/.ssh/id_rsa.pub
+  docker cp ~/.gitconfig $container:$home/.gitconfig
 else
   printf "\nERROR! container $container is not running...\n"
 fi
