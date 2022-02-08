@@ -13,7 +13,8 @@ RUN sudo apt-get update && sudo apt-get install -y \
     gcc g++ uuid-dev clang fswatch 
 
 # zlib1g-dev libcunit1-dev libssl-dev libxml2-dev libev-dev libevent-dev libcap-dev
-ADD install.tgz
+ADD install.tgz /
+RUN sudo chown -R coder:coder /home/coder
 
 # enable local docker networks to connect
 EXPOSE 80 5050-5060

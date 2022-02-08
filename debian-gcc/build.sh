@@ -12,7 +12,7 @@ export BUILD=$( date +"%s" )
 
 [ -d workspace ] || mkdir workspace
 
-tar czvf install.tgz home etc usr
+tar czvf install.tgz home usr
 
 IMAGE=${DOCKER_REPO}/debian-gcc
 
