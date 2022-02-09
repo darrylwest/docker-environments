@@ -10,8 +10,6 @@ export DOCKER_REPO=darrylwest
 export VERSION=$( date +"%y.%m.%d" )
 export BUILD=$( date +"%s" )
 
-[ -d workspace ] || mkdir workspace
-
 tar czvf install.tgz home usr
 
 IMAGE=${DOCKER_REPO}/debian-gcc
