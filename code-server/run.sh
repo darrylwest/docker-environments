@@ -16,10 +16,19 @@ set -eu
 #
 # mkdir -p ~/.config
 # -v "$HOME/.config:/home/coder/.config" \
+# -v "$PWD:/home/coder/project" \
+# -u "$(id -u):$(id -g)" \
+# -e "DOCKER_USER=$USER" \
 
-docker run -it --name code-server -p 0.0.0.0:5050:8080 \
-  -v "$PWD:/home/coder/project" \
-  -u "$(id -u):$(id -g)" \
-  -e "DOCKER_USER=$USER" \
+# export DOCKER_REPO=darrylwest
+# export IMAGE=${DOCKER_REPO}/debian-gcc
+# export VSN=$(cat version)
+
+PORT=5055
+
+docker run -it \
+  --detach \
+  --name code-server \
+  -p 0.0.0.0:$PORT:8080 \
   codercom/code-server:latest
 
