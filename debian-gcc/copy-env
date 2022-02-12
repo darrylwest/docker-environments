@@ -15,6 +15,7 @@ then
   docker cp ~/.ssh/id_rsa $container:$home/.ssh/id_rsa
   docker cp ~/.ssh/id_rsa.pub $container:$home/.ssh/id_rsa.pub
   docker cp ~/.gitconfig $container:$home/.gitconfig
+  docker cp home/coder/install.repos $container:$home/install.repos
 
   docker exec -it $container sudo chown -R coder:coder /home/coder
 else

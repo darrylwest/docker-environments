@@ -20,6 +20,8 @@ function install_projects() {
 
   git clone git@gitlab.com:darrylwest/cpp-utils.git
   git clone git@gitlab.com:darrylwest/cpp-sandbox.git
+  git clone git@github.com:darrylwest/replica.git
+  git clone git@github.com:darrylwest/repo-util.git
 
 }
 
