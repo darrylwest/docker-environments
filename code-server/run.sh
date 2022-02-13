@@ -14,20 +14,20 @@ set -eu
 # easily access/modify your code-server config in $HOME/.config/code-server/config.json
 # outside the container.
 #
-# mkdir -p ~/.config
-# -v "$HOME/.config:/home/coder/.config" \
-# -v "$PWD:/home/coder/project" \
-# -u "$(id -u):$(id -g)" \
-# -e "DOCKER_USER=$USER" \
 
 # export DOCKER_REPO=darrylwest
 # export IMAGE=${DOCKER_REPO}/debian-gcc
 # export VSN=$(cat version)
 
-PORT=5055
+PORT=5065
 
+mkdir -p ~/.config
 docker run -it \
   --detach \
+  -v "$HOME/.config:/home/coder/.config" \
+  -v "$PWD:/home/coder/project" \
+  -u "$(id -u):$(id -g)" \
+  -e "DOCKER_USER=$USER" \
   --name code-server \
   -p 0.0.0.0:$PORT:8080 \
   codercom/code-server:latest
