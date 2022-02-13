@@ -6,20 +6,23 @@
 set -eu
 
 function make_projects() {
-  cd ~/
-  mkdir -p ~/c-projects
+  [ -d ~/c-projects ] || mkdir -p ~/c-projects
   cd ~/c-projects
 }
 
 function install_dependents() {
   make_projects()
 
-  cd ~/c-projects
   git clone https://github.com/fmtlib/fmt.git \
       && cd fmt \
       && mkdir build && cd build && cmake .. && make && sudo make install
 
-  cd ~/c-projects
+}
+
+# skip this...
+function install_poco() {
+  make_projects()
+
   git clone -b master https://github.com/pocoproject/poco.git \
     && cd poco && mkdir cmake-build && cd cmake-build \
     && cmake .. && cmake --build . --config Release \
