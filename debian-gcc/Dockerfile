@@ -5,14 +5,14 @@
 # latest is currently debian-11
 FROM codercom/code-server:latest
 
-LABEL maintainer="darryl west" version="22.02.08"
+LABEL maintainer="darryl west" version="22.02.12"
 
 RUN sudo apt-get update && sudo apt-get install -y \
     make binutils autoconf automake autotools-dev libtool pkg-config cmake \
-    build-essential curl wget jq neovim git-core \
-    gcc g++ uuid-dev clang fswatch 
+    build-essential curl wget jq neovim git-core gcc g++ uuid-dev clang \
+    fswatch openssl libssl-dev libevent-dev
 
-# zlib1g-dev libcunit1-dev libssl-dev libxml2-dev libev-dev libevent-dev libcap-dev
+# zlib1g-dev libcunit1-dev libxml2-dev libev-dev libevent-dev libcap-dev
 ADD install.tgz /
 RUN sudo chown -R coder:coder /home/coder
 

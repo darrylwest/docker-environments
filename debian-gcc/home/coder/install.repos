@@ -14,10 +14,16 @@ function make_projects() {
 function install_dependents() {
   make_projects()
 
+  cd ~/c-projects
   git clone https://github.com/fmtlib/fmt.git \
       && cd fmt \
       && mkdir build && cd build && cmake .. && make && sudo make install
 
+  cd ~/c-projects
+  git clone -b master https://github.com/pocoproject/poco.git \
+    && cd poco && mkdir cmake-build && cd cmake-build \
+    && cmake .. && cmake --build . --config Release \
+    && sudo cmake --build . --target install
 }
 
 function install_projects() {
