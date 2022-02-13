@@ -11,7 +11,7 @@ function make_projects() {
 }
 
 function install_dependents() {
-  make_projects()
+  make_projects
 
   git clone https://github.com/fmtlib/fmt.git \
       && cd fmt \
@@ -21,7 +21,7 @@ function install_dependents() {
 
 # skip this...
 function install_poco() {
-  make_projects()
+  make_projects
 
   git clone -b master https://github.com/pocoproject/poco.git \
     && cd poco && mkdir cmake-build && cd cmake-build \
@@ -30,7 +30,7 @@ function install_poco() {
 }
 
 function install_projects() {
-  make_projects()
+  make_projects
 
   git clone git@gitlab.com:darrylwest/cpp-utils.git
   git clone git@gitlab.com:darrylwest/cpp-sandbox.git
@@ -39,7 +39,7 @@ function install_projects() {
 }
 
 function install_extras() {
-  make_projects()
+  make_projects
 
   git clone https://github.com/eminfedar/async-sockets-cpp.git
 }
