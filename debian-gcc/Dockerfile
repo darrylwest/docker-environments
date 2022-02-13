@@ -10,7 +10,7 @@ LABEL maintainer="darryl west" version="22.02.12"
 RUN sudo apt-get update && sudo apt-get install -y \
     make binutils autoconf automake autotools-dev libtool pkg-config cmake \
     build-essential curl wget jq neovim git-core gcc g++ uuid-dev clang \
-    fswatch openssl libssl-dev libevent-dev
+    ninja-build fswatch openssl libssl-dev libevent-dev
 
 # zlib1g-dev libcunit1-dev libxml2-dev libev-dev libevent-dev libcap-dev
 ADD install.tgz /
