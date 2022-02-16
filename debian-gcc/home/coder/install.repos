@@ -29,6 +29,10 @@ function install_poco() {
     && sudo cmake --build . --target install
 }
 
+function install_boost() {
+  sudo apt-get update && sudo apt-get install -y libboost-all-dev
+}
+
 function install_projects() {
   make_projects
 
