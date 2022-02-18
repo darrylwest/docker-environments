@@ -5,12 +5,17 @@
 
 set -eu
 
-function make_projects() {
+make_projects() {
   [ -d ~/c-projects ] || mkdir -p ~/c-projects
   cd ~/c-projects
 }
 
-function install_dependents() {
+install_rust() {
+  curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh -s -- -y
+  cargo --version
+}
+
+install_dependents() {
   make_projects
 
   git clone https://github.com/fmtlib/fmt.git \
@@ -20,7 +25,7 @@ function install_dependents() {
 }
 
 # skip this...
-function install_poco() {
+install_poco() {
   make_projects
 
   git clone -b master https://github.com/pocoproject/poco.git \
@@ -29,23 +34,24 @@ function install_poco() {
     && sudo cmake --build . --target install
 }
 
-function install_boost() {
+install_boost() {
   sudo apt-get update && sudo apt-get install -y libboost-all-dev
 }
 
-function install_projects() {
+install_projects() {
   make_projects
 
   git clone git@gitlab.com:darrylwest/cpp-utils.git
   git clone git@gitlab.com:darrylwest/cpp-sandbox.git
   git clone git@github.com:darrylwest/replica.git
   git clone git@github.com:darrylwest/repo-util.git repos
+  git clone git@github.com:darrylwest/tcp-server
 }
 
-function install_extras() {
+install_extras() {
   make_projects
 
-  git clone https://github.com/eminfedar/async-sockets-cpp.git
+  echo "no extra projects at this time..."
 }
 
 install_projects
