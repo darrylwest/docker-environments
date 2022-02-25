@@ -8,6 +8,8 @@ RUN apk update && apk upgrade && apk add --no-cache which bash jq curl neovim tt
 
 ADD install.tgz /
 
+VOLUME /home
+
 EXPOSE 7681
 
 CMD ["ttyd", "bash", "-l"]

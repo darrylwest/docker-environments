@@ -14,6 +14,8 @@ export name=alpine-ttyd
 docker run --name $name \
     -it \
     --detach \
+    --volume $PWD:/home \
+    --workdir /home \
     -p 7681:7681 \
     "$IMAGE:$VSN"
 
