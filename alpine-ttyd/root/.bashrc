@@ -6,6 +6,8 @@
 set -o vi
 export EDITOR=vi
 
+[ -f /usr/bin/nvim ] && alias vi=/usr/bin/nvim
+
 PS1='\033[01;34mMachine? \033[01;32malpine:\033[00m '
 
 alias hi='history'
