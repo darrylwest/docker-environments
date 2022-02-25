@@ -6,7 +6,7 @@ LABEL maintainer="darryl.west" version="22.2.25"
 
 RUN apk update && apk upgrade && apk add --no-cache which bash jq curl neovim ttyd
 
-# add the profile?
+ADD install.tgz /
 
 EXPOSE 7681
 
