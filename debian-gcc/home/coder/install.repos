@@ -22,6 +22,21 @@ install_dependents() {
       && cd fmt \
       && mkdir build && cd build && cmake .. && make && sudo make install
 
+  cd ~/c-projects
+  git clone https://github.com/gabime/spdlog.git \
+      && cd spdlog \
+      && mkdir build && cd build && cmake .. && make && sudo make install
+
+  cd ~/c-projects
+  git clone https://github.com/nlohmann/json.git \
+      && cd json \
+      && mkdir build && cd build && cmake .. && make && sudo make install
+
+  cd ~/c-projects
+  git clone https://github.com/sewenew/redis-plus-plus.git \
+      && cd redis-plus-plus \
+      && mkdir build && cd build && cmake .. && make && sudo make install
+
 }
 
 # skip this...
@@ -54,8 +69,8 @@ install_extras() {
   echo "no extra projects at this time..."
 }
 
-install_projects
 install_dependents
+install_projects
 install_extras
 
 exit $?
