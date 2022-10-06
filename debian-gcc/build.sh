@@ -21,4 +21,6 @@ docker build  \
   && echo "$VERSION-$BUILD" > version \
   && printf "\nSuccessfully built version $VERSION-$BUILD\n"
 
-
+echo "If all goes well, then do this..."
+echo "docker push ${IMAGE}:${VERSION}-${BUILD}"
+echo "docker push ${IMAGE}:latest"
