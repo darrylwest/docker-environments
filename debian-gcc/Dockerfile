@@ -5,7 +5,7 @@
 # latest is currently debian-11
 FROM codercom/code-server:latest
 
-LABEL maintainer="darryl west" version="22.02.16"
+LABEL maintainer="darryl west" version="22.10.06"
 
 RUN sudo apt-get update && sudo apt-get install -y \
     make binutils autoconf automake autotools-dev libtool pkg-config cmake \

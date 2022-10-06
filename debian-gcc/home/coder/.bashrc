@@ -26,4 +26,6 @@ alias gac='git add . ; git commit -v'
 alias gpull='git pull'
 alias gpush='git push'
 
+fgrep password: ~/.config/code-server/config.yaml
+
 cat ~/.motd
