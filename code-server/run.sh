@@ -1,34 +1,21 @@
 #!/usr/bin/env bash
-# dpw@Darryls-iMac.localdomain
-# 2022-02-06 21:44:58
+# dpw@piedmont
+# 2023-11-15 19:02:33
+# @see https://hub.docker.com/r/linuxserver/code-server
 #
+# ubuntu 22
 
-set -eu
+docker run -d \
+  --name=code-server \
+  -e PUID=1000 \
+  -e PGID=1000 \
+  -e TZ=Etc/UTC \
+  -e PASSWORD=7mkm4YRpPf2i \
+  -e PROXY_DOMAIN=code-server.piedmont \
+  -e DEFAULT_WORKSPACE=/config/workspace `#optional` \
+  -p 8443:8443 \
+  -v /path/to/appdata/config:/config \
+  --restart unless-stopped \
+  lscr.io/linuxserver/code-server:latest
 
-# This will start a simple code-server container and expose it at port 5050.
-# It will also mount your work directory into the container as `/home/coder/project`
-# and forward your UID/GID so that all file system operations occur as your user outside
-# the container.
-#
-# Your $HOME/.config is mounted at $HOME/.config within the container to ensure you can
-# easily access/modify your code-server config in $HOME/.config/code-server/config.json
-# outside the container.
-#
-
-# export DOCKER_REPO=darrylwest
-# export IMAGE=${DOCKER_REPO}/debian-gcc
-# export VSN=$(cat version)
-
-PORT=5065
-
-mkdir -p ~/.config
-docker run -it \
-  --detach \
-  -v "$HOME/.config:/home/coder/.config" \
-  -v "$PWD:/home/coder/project" \
-  -u "$(id -u):$(id -g)" \
-  -e "DOCKER_USER=$USER" \
-  --name code-server \
-  -p 0.0.0.0:$PORT:8080 \
-  codercom/code-server:latest
 
