@@ -13,8 +13,17 @@ alias rm='/bin/rm -i'
 alias lc='/bin/ls -c'
 alias l='/bin/ls -la'
 alias lh='/bin/ls -lt | head -50'
-
 alias ut='exit'
+
+if [ -x ~/.cargo/bin/lsd ]
+then
+    alias l='~/.cargo/bin/lsd -lA'
+fi
+
+if [ -x ~/.cargo/bin/bat ]
+then
+    alias cat='~/.cargo/bin/bat'
+fi
 
 #################################################################################
 # git aliases
