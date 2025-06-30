@@ -5,73 +5,13 @@
 
 set -eu
 
-make_projects() {
-  [ -d ~/c-projects ] || mkdir -p ~/c-projects
-  cd ~/c-projects
-}
-
 install_rust() {
   curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh -s -- -y
   cargo --version
 }
 
-install_dependents() {
-  make_projects
 
-  git clone https://github.com/fmtlib/fmt.git \
-      && cd fmt \
-      && mkdir build && cd build && cmake .. && make && sudo make install
-
-  cd ~/c-projects
-  git clone https://github.com/gabime/spdlog.git \
-      && cd spdlog \
-      && mkdir build && cd build && cmake .. && make && sudo make install
-
-  cd ~/c-projects
-  git clone https://github.com/nlohmann/json.git \
-      && cd json \
-      && mkdir build && cd build && cmake .. && make && sudo make install
-
-  cd ~/c-projects
-  git clone https://github.com/sewenew/redis-plus-plus.git \
-      && cd redis-plus-plus \
-      && mkdir build && cd build && cmake .. && make && sudo make install
-
-}
-
-# skip this...
-install_poco() {
-  make_projects
-
-  git clone -b master https://github.com/pocoproject/poco.git \
-    && cd poco && mkdir cmake-build && cd cmake-build \
-    && cmake .. && cmake --build . --config Release \
-    && sudo cmake --build . --target install
-}
-
-install_boost() {
-  sudo apt-get update && sudo apt-get install -y libboost-all-dev
-}
-
-install_projects() {
-  make_projects
-
-  git clone git@gitlab.com:darrylwest/cpp-utils.git
-  git clone git@gitlab.com:darrylwest/cpp-sandbox.git
-  git clone git@github.com:darrylwest/replica.git
-  git clone git@github.com:darrylwest/repo-util.git repos
-  git clone git@github.com:darrylwest/tcp-server
-}
-
-install_extras() {
-  make_projects
-
-  echo "no extra projects at this time..."
-}
-
-install_dependents
-install_projects
-install_extras
+install_rust
 
 exit $?
 

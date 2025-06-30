@@ -6,7 +6,7 @@
 set -o vi
 export EDITOR=vi
 
-PS1='\033[01;34mmachine? \033[01;32mc++ coder:\033[00m🪲  '
+PS1='\033[01;34mmachine? \033[01;32mc++ dpw:\033[00m🪲 '
 
 alias hi='history'
 alias rm='/bin/rm -i'
