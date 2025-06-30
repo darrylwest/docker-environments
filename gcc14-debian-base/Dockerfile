@@ -1,5 +1,5 @@
 # Use the official Debian 12 (Bookworm) base image
-FROM debian:12
+FROM debian:12-slim
 
 LABEL maintainer="darryl west" version="25.06.30-base"
 
@@ -11,19 +11,12 @@ RUN apt update && \
     apt install -y build-essential libgmp-dev libmpfr-dev libmpc-dev flex bison texinfo curl wget \
     xz-utils git vim neovim nano ninja-build fswatch openssl libssl-dev iputils-ping jq libsodium-dev libncurses-dev
 
-# --- Download and extract CMake source code ---
+# --- Download and extract CMake binary ---
 WORKDIR /usr/src
-RUN wget https://cmake.org/files/v3.31/cmake-3.31.6.tar.gz && \
-    tar -xf cmake-3.31.6.tar.gz
+RUN wget https://github.com/Kitware/CMake/releases/download/v3.31.6/cmake-3.31.6-linux-x86_64.sh && \\
+    chmod a+x cmake-3.31.6-linux-x86_64.sh && \
+    ./cmake-3.31.6-linux-x86_64.sh --skip-license --prefix=/usr/local
 
-# --- Build and install CMake ---
-WORKDIR /usr/src/cmake-3.31.6
-RUN ./bootstrap --prefix=/opt/cmake-3.31.6 && \
-    make -j$(nproc) && \
-    make install
-
-# --- Update PATH for CMake ---
-ENV PATH="/opt/cmake-3.31.6/bin:${PATH}"
 
 # --- Download and extract GCC source code ---
 WORKDIR /usr/src
@@ -46,34 +39,6 @@ RUN update-alternatives --install /usr/bin/gcc gcc /opt/gcc-14.2.0/bin/gcc 140 \
 
 # Verify the installed GCC version
 RUN gcc --version
-
-# --- Install external libraries from source (placeholders) ---
-# You will need to replace these with actual URLs and build steps
-WORKDIR /usr/local/src
-
-# termio
-RUN git clone https://github.com/darrylwest/cpp-termio.git termio && \
-    cd termio && \
-    mkdir build && cd build && cmake .. && make && make test && make install && \
-    cd /usr/local/src
-
-# money
-RUN git clone https://github.com/darrylwest/cpp-money.git money && \
-    cd money && \
-    mkdir build && cd build && cmake .. && make && make test && make install && \
-    cd /usr/local/src
-    
-# domainkeys
-RUN git clone https://github.com/darrylwest/cpp-money.git domainkeys && \
-    cd domainkeys && \
-    mkdir build && cd build && cmake .. && make && make test && make install && \
-    cd /usr/local/src
-
-# quickkv
-RUN git clone https://github.com/darrylwest/quickkv.git quickkv && \
-    cd quickkv && \
-    mkdir build && cd build && cmake .. && make && make test && make install && \
-    cd /usr/local/src
 
 # --- Clean up to reduce image size ---
 # These are build artifacts from the base image, safe to remove here.

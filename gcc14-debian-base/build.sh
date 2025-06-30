@@ -5,5 +5,18 @@
 
 set -eu
 
-image=gcc14-debian-base
-docker build -t $image .
+name=gcc14.2-debian12-base
+
+export DOCKER_REPO=darrylwest
+export IMAGE=${DOCKER_REPO}/$name
+
+export VERSION=$( date +"%y.%m.%d" )
+export BUILD=$( date +"%s" )
+
+docker build \
+    -t $IMAGE:$VERSION-$BUILD \
+    -t $IMAGE:latest .
+
+echo "If all goes well, then do this..."
+echo "docker push ${IMAGE}:${VERSION}-${BUILD}"
+echo "docker push ${IMAGE}:latest"
