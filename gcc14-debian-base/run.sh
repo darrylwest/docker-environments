@@ -5,8 +5,8 @@
 
 set -eu
 
-name=gcc14.2-debian-12-base-dev
-image=gcc14.2-debian12-base
+name=gcc14.2-debian-12-dev
+image=gcc14.2-debian12-thin
 export DOCKER_REPO=darrylwest
 export IMAGE=${DOCKER_REPO}/$image
 # export VSN=$(cat version)
