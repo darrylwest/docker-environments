@@ -5,13 +5,33 @@
 
 set -eu
 
+make_project_folder() {
+  [ -d ~/c-projects ] || mkdir -p ~/c-projects
+  cd ~/c-projects
+}
+
+install_projects() {
+    make_project_folder
+
+    git clone git@github.com/darrylwest/cpp-termio.git termio
+    git clone git@github.com/darrylwest/cpp-money.git money
+    git clone git@github.com/darrylwest/quickkv.git quickkv
+    git clone git@github.com/darrylwest/cpp-money.git domainkeys
+    git clone git@github.com:darrylwest/cpp-request.git
+    git clone git@github.com:darrylwest/cpp-tiny-app-starter.git
+    git clont git@github.com:darrylwest/web-app-starter.git
+}
+
 install_rust() {
   curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh -s -- -y
   cargo --version
+
+  cargo install lsd
+  cargo install bat
 }
 
-
 install_rust
+install_projects
 
 exit $?
 
