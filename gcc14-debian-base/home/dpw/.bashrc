@@ -14,6 +14,10 @@ alias lc='/bin/ls -c'
 alias l='/bin/ls -la'
 alias lh='/bin/ls -lt | head -50'
 
+[ -x ~/.cargo/bin/lsd ] && alias l='lsd -lA --size bytes'
+[ -x ~/.cargo/bin/rg ] && alias fgrep='rg'
+[ -x ~/.cargo/bin/bat ] && alias cat='bat'
+
 alias ut='exit'
 
 #################################################################################
