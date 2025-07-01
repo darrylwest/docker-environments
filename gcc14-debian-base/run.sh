@@ -6,7 +6,7 @@
 set -eu
 
 name=gcc14.2-debian-12-dev
-image=gcc14.2-debian12-thin
+image=gcc14.2-debian12-dev
 export DOCKER_REPO=darrylwest
 export IMAGE=${DOCKER_REPO}/$image
 # export VSN=$(cat version)
@@ -20,3 +20,5 @@ docker run --name $name \
 sleep 2
 docker ps | fgrep debian-gcc
 
+sleep 2
+./copy-env

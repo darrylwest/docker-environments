@@ -5,7 +5,7 @@
 
 set -eu
 
-name=gcc14.2-debian12-thin
+name=gcc14.2-debian12-dev
 
 export DOCKER_REPO=darrylwest
 export IMAGE=${DOCKER_REPO}/$name
@@ -15,7 +15,7 @@ export BUILD=$( date +"%s" )
 
 tar czvf install.tgz home usr
 
-docker build \
+time docker build --no-cache \
     -t $IMAGE:$VERSION-$BUILD \
     -t $IMAGE:latest .
 

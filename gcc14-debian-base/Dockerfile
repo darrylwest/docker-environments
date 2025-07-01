@@ -1,7 +1,7 @@
 # Use the official Debian 12 (Bookworm) base image
 FROM debian:12-slim
 
-LABEL maintainer="darryl west" version="25.07.01-thin"
+LABEL maintainer="darryl west" version="25.07.01"
 
 # Set environment variables for non-interactive installation
 ENV DEBIAN_FRONTEND=noninteractive
@@ -24,8 +24,11 @@ RUN wget https://github.com/Kitware/CMake/releases/download/v3.31.6/cmake-3.31.6
     ./cmake-3.31.6-linux-x86_64.sh --skip-license --prefix=/usr/local && \
     rm cmake-3.31.6-linux-x86_64.sh
 
-# Set the locale in the environment
-RUN update-locale LANG=en_US.UTF-8
+# Set the locale in the environment (this breaks)
+RUN echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen && \
+    locale-gen en_US.UTF-8 && \
+    export LANG=en_US.UTF-8 && \
+    export LC_ALL=en_US.UTF-8
 
 ADD gcc-14.2.0.tar.gz /opt
 
@@ -43,6 +46,10 @@ RUN git clone https://github.com/catchorg/Catch2.git && \
     cd Catch2 && cmake -B build -S . -DBUILD_TESTING=OFF && \
     cmake --build build/ --target install && \
     rm -fr Catch2/
+
+# --- sockpp build? ---
+
+# -- other dep builds... ---
 
 # --- Clean up to reduce image size ---
 # These are build artifacts from the base image, safe to remove here.

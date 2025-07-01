@@ -28,13 +28,18 @@ install_projects() {
 install_rust() {
   curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh -s -- -y
   cargo --version
+}
 
+install_rust_binaries() {
   cargo install lsd
   cargo install bat
 }
 
 install_rust
-install_projects
+export PATH="~/.cargo/bin:$PATH"
+install_rust_binaries
+
+# install_projects
 
 exit $?
 
