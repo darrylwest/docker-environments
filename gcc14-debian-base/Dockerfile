@@ -13,8 +13,8 @@ ENV LANG=en_US.UTF-8 \
 
 # --- Install build dependencies for GCC, CMake, and other libraries ---
 RUN apt update && \
-    apt install -y --no-install-recommends build-essential make binutils autoconf automake libtool libgmp-dev pkg-config \
-    libmpfr-dev libmpc-dev flex bison texinfo curl wget uuid-dev python3-dev libstdc++6 locales \
+    apt install -y build-essential make binutils autoconf automake libtool libgmp-dev pkg-config \
+    libmpfr-dev libmpc-dev flex bison texinfo curl wget uuid-dev python3-dev libstdc++6 locales openssh-client \
     xz-utils git vim neovim ninja-build fswatch openssl libssl-dev iputils-ping jq libsodium-dev libncurses-dev \
     nlohmann-json3-dev procps ca-certificates gnupg
 
