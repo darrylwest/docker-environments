@@ -1,15 +1,20 @@
 # Use the official Debian 12 (Bookworm) base image
 FROM debian:12-slim
 
-LABEL maintainer="darryl west" version="25.06.30-thin"
+LABEL maintainer="darryl west" version="25.07.01-thin"
 
 # Set environment variables for non-interactive installation
 ENV DEBIAN_FRONTEND=noninteractive
 
+# Set environment variables for locale (required for money)
+ENV LANG=en_US.UTF-8 \
+    LANGUAGE=en_US:en \
+    LC_ALL=en_US.UTF-8
+
 # --- Install build dependencies for GCC, CMake, and other libraries ---
 RUN apt update && \
     apt install -y build-essential make binutils autoconf automake libtool libgmp-dev pkg-config \
-    libmpfr-dev libmpc-dev flex bison texinfo curl wget uuid-dev python3-dev libstdc++6 \
+    libmpfr-dev libmpc-dev flex bison texinfo curl wget uuid-dev python3-dev libstdc++6 locales \
     xz-utils git vim neovim ninja-build fswatch openssl libssl-dev iputils-ping jq libsodium-dev libncurses-dev 
 
 # --- Download and extract CMake binary ---
@@ -17,6 +22,9 @@ RUN wget https://github.com/Kitware/CMake/releases/download/v3.31.6/cmake-3.31.6
     chmod a+x cmake-3.31.6-linux-x86_64.sh && \
     ./cmake-3.31.6-linux-x86_64.sh --skip-license --prefix=/usr/local && \
     rm cmake-3.31.6-linux-x86_64.sh
+
+# Set the locale in the environment
+RUN update-locale LANG=en_US.UTF-8
 
 ADD gcc-14.2.0.tar.gz /opt
 
