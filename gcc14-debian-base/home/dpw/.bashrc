@@ -8,6 +8,8 @@ export EDITOR=vi
 
 PS1='\033[01;34mc++ 14.2 \033[01;32mdpw:\033[00m🪲 '
 
+cat ~/.motd
+
 alias hi='history'
 alias rm='/bin/rm -i'
 alias lc='/bin/ls -c'
@@ -30,4 +32,3 @@ alias gac='git add . ; git commit -v'
 alias gpull='git pull'
 alias gpush='git push'
 
-cat ~/.motd
