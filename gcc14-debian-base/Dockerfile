@@ -13,9 +13,10 @@ ENV LANG=en_US.UTF-8 \
 
 # --- Install build dependencies for GCC, CMake, and other libraries ---
 RUN apt update && \
-    apt install -y build-essential make binutils autoconf automake libtool libgmp-dev pkg-config \
+    apt install -y --no-install-recommends build-essential make binutils autoconf automake libtool libgmp-dev pkg-config \
     libmpfr-dev libmpc-dev flex bison texinfo curl wget uuid-dev python3-dev libstdc++6 locales \
-    xz-utils git vim neovim ninja-build fswatch openssl libssl-dev iputils-ping jq libsodium-dev libncurses-dev 
+    xz-utils git vim neovim ninja-build fswatch openssl libssl-dev iputils-ping jq libsodium-dev libncurses-dev \
+    nlohmann-json3-dev procps ca-certificates gnupg
 
 # --- Download and extract CMake binary ---
 RUN wget https://github.com/Kitware/CMake/releases/download/v3.31.6/cmake-3.31.6-linux-x86_64.sh && \

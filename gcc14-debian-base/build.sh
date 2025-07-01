@@ -13,7 +13,7 @@ export IMAGE=${DOCKER_REPO}/$name
 export VERSION=$( date +"%y.%m.%d" )
 export BUILD=$( date +"%s" )
 
-tar czvf install.tgz home
+tar czvf install.tgz home usr
 
 docker build \
     -t $IMAGE:$VERSION-$BUILD \
