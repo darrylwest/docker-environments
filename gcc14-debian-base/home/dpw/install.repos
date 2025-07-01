@@ -16,8 +16,8 @@ install_projects() {
     git clone git@github.com/darrylwest/cpp-termio.git termio
     git clone git@github.com/darrylwest/cpp-money.git money
     git clone git@github.com/darrylwest/quickkv.git quickkv
-    git clone git@github.com/darrylwest/cpp-money.git domainkeys
-    git clone git@github.com:darrylwest/cpp-request.git
+    git clone git@github.com:darrylwest/cpp-domain-keys.git domain-keys
+    git clone git@github.com:darrylwest/cpp-request.git request
     git clone git@github.com:darrylwest/cpp-tiny-app-starter.git
     git clont git@github.com:darrylwest/web-app-starter.git
 }
