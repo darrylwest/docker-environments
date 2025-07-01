@@ -32,3 +32,4 @@ alias gac='git add . ; git commit -v'
 alias gpull='git pull'
 alias gpush='git push'
 
+alias mk='task-runner'
