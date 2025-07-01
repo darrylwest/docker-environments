@@ -38,7 +38,7 @@ RUN update-alternatives --install /usr/bin/gcc gcc /opt/gcc-14.2.0/bin/gcc 140 \
      update-alternatives --set gcc /opt/gcc-14.2.0/bin/gcc
 
 # Verify the installed GCC version
-RUN gcc --version
+RUN gcc --version && cmake --version
 
 # --- Catch2 build ---
 WORKDIR /opt
@@ -47,7 +47,11 @@ RUN git clone https://github.com/catchorg/Catch2.git && \
     cmake --build build/ --target install && \
     rm -fr Catch2/
 
-# --- sockpp build? ---
+# --- sockpp build ---
+RUN git clone https://github.com/fpagliughi/sockpp.git && \
+    cd sockpp && cmake -B build -DSOCKPP_BUILD_SHARED=OFF -DSOCKPP_BUILD_STATIC=ON . && \
+    cmake --build build/ --target install
+
 
 # -- other dep builds... ---
 
