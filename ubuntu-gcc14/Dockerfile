@@ -1,7 +1,7 @@
 # Use the official Debian 12 (Bookworm) base image
-FROM debian:12-slim
+FROM ubuntu:oracular
 
-LABEL maintainer="darryl west" version="25.07.01-102"
+LABEL maintainer="darryl west" version="25.07.01-100"
 
 # Set environment variables for non-interactive installation
 ENV DEBIAN_FRONTEND=noninteractive
@@ -16,7 +16,8 @@ RUN apt update && \
     apt install -y build-essential make binutils autoconf automake libtool libgmp-dev pkg-config \
     libmpfr-dev libmpc-dev flex bison texinfo curl wget uuid-dev python3-dev libstdc++6 locales openssh-client \
     xz-utils git vim neovim ninja-build fswatch openssl libssl-dev iputils-ping jq libsodium-dev libncurses-dev \
-    nlohmann-json3-dev procps ca-certificates gnupg
+    nlohmann-json3-dev procps ca-certificates gnupg software-properties-common \
+    gcc-14 g++-14
 
 # --- Download and extract CMake binary ---
 RUN wget https://github.com/Kitware/CMake/releases/download/v3.31.6/cmake-3.31.6-linux-x86_64.sh && \
@@ -29,13 +30,6 @@ RUN echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen && \
     locale-gen en_US.UTF-8 && \
     export LANG=en_US.UTF-8 && \
     export LC_ALL=en_US.UTF-8
-
-ADD gcc-14.2.0.tar.gz /opt
-
-# --- Set the newly built GCC as the default ---
-RUN update-alternatives --install /usr/bin/gcc gcc /opt/gcc-14.2.0/bin/gcc 140 \
-     --slave /usr/bin/g++ g++ /opt/gcc-14.2.0/bin/g++ && \
-     update-alternatives --set gcc /opt/gcc-14.2.0/bin/gcc
 
 # Verify the installed GCC version
 RUN gcc --version && cmake --version
@@ -79,7 +73,7 @@ RUN apt autoremove -y && \
 COPY .bashrc /root/.bashrc
 
 # -- now create a dpw user --
-RUN groupadd --gid 1000 dpw && useradd --uid 1000 --gid 1000 --shell /bin/bash --create-home dpw
+RUN groupadd dpw && useradd --gid dpw --create-home --shell /bin/bash dpw
 
 # ADD the home/user install.tgz
 ADD install.tgz /
