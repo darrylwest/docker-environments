@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+# dpw@Darryls-iMac.localdomain
+# 2022-02-08 18:51:07
+#
+
+set -eu
+
+make_project_folder() {
+  [ -d ~/c-projects ] || mkdir -p ~/c-projects
+  cd ~/c-projects
+}
+
+# TODO move all of this to Dockerfile
+install_projects() {
+    make_project_folder
+
+    # git@github.com:darrylwest/cpp-tcp-db.git tcp-db
+    # git@github.com:darrylwest/cpp-tiny-app-starter.git tiny-app-starter
+    git clone git@github.com:darrylwest/web-app-starter.git && cd web-app-starter && git co develop
+}
+
+install_rust() {
+    [ -x ~/.cargo/bin/cargo ] || {
+        curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh -s -- -y
+        ~/.cargo/bin/cargo --version
+    }
+}
+
+install_rust_binaries() {
+    [ -x ~/.cargo/bin/lsd ] || cargo install lsd
+    [ -x ~/.cargo/bin/bat ] || cargo install bat
+}
+
+export PATH="~/.cargo/bin:$PATH"
+
+install_rust
+install_rust_binaries
+install_projects
+
+

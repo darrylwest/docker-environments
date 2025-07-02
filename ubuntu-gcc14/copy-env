@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# dpw@Darryls-iMac.localdomain
+# 2022-02-05 14:51:04
+#
+
+set -eu
+
+export container=ubuntu-24.10-gcc-14.2
+
+export home=/home/dpw
+
+if docker ps | fgrep $container > /dev/null
+then
+  printf "copy local ssh keys to $container...\n"
+  docker cp ~/.ssh/id_rsa $container:$home/.ssh/id_rsa
+  docker cp ~/.ssh/id_rsa.pub $container:$home/.ssh/id_rsa.pub
+  docker cp ~/.gitconfig $container:$home/.gitconfig
+  docker cp home/coder/install.repos $container:$home/install.repos
+
+  docker exec -it $container sudo chown -R coder:coder /home/coder
+else
+  printf "\nERROR! container $container is not running...\n"
+fi
+
