@@ -19,6 +19,7 @@ alias lh='/bin/ls -lt | head -50'
 [ -x ~/.cargo/bin/lsd ] && alias l='lsd -lA --size bytes'
 [ -x ~/.cargo/bin/rg ] && alias fgrep='rg'
 [ -x ~/.cargo/bin/bat ] && alias cat='bat'
+[ -x /usr/bin/nvim ] && alias vi='nvim -O'
 
 alias ut='exit'
 
