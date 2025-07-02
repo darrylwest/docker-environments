@@ -1,7 +1,7 @@
 # Use the official Debian 12 (Bookworm) base image
 FROM debian:12-slim
 
-LABEL maintainer="darryl west" version="25.07.01-101"
+LABEL maintainer="darryl west" version="25.07.01-102"
 
 # Set environment variables for non-interactive installation
 ENV DEBIAN_FRONTEND=noninteractive
