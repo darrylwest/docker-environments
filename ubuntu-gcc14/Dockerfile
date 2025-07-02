@@ -1,4 +1,4 @@
-# Use the official Debian 12 (Bookworm) base image
+# Use the official Ubuntu 24.10 oracular
 FROM ubuntu:oracular
 
 LABEL maintainer="darryl west" version="25.07.01-100"
