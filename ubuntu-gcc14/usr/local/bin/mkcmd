@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# dpw
+# Sat Sep 21 06:48:52 PDT 2002
+#
+
+if [ $# != 1 ]
+then
+    echo "Error in command line..."
+    echo "USE: mkcmd command"
+else
+    echo "#!/usr/bin/env bash
+# dpw@`uname -n`
+# `date +%Y.%m.%d`
+#
+
+set -eu
+
+" > $1
+    chmod a+x $1
+    vi + $1
+fi
