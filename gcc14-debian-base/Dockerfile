@@ -1,7 +1,7 @@
 # Use the official Debian 12 (Bookworm) base image
 FROM debian:12-slim
 
-LABEL maintainer="darryl west" version="25.07.01"
+LABEL maintainer="darryl west" version="25.07.01-101"
 
 # Set environment variables for non-interactive installation
 ENV DEBIAN_FRONTEND=noninteractive
@@ -44,22 +44,36 @@ RUN gcc --version && cmake --version
 WORKDIR /opt
 RUN git clone https://github.com/catchorg/Catch2.git && \
     cd Catch2 && cmake -B build -S . -DBUILD_TESTING=OFF && \
-    cmake --build build/ --target install && \
-    rm -fr Catch2/
+    cmake --build build/ --target install 
 
 # --- sockpp build ---
 RUN git clone https://github.com/fpagliughi/sockpp.git && \
     cd sockpp && cmake -B build -DSOCKPP_BUILD_SHARED=OFF -DSOCKPP_BUILD_STATIC=ON . && \
     cmake --build build/ --target install
 
+# -- rcs dep builds... ---
+RUN git clone https://github.com/darrylwest/cpp-domain-keys.git domain-keys && \
+    cd domain-keys && cmake -B build . && \
+    cmake --build build/ --target install
 
-# -- other dep builds... ---
+RUN git clone https://github.com/darrylwest/cpp-termio.git termio && \
+    cd termio && cmake -B build . && \
+    cmake --build build/ --target install
+
+RUN git clone https://github.com/darrylwest/cpp-money.git money && \
+    cd money && cmake -B build . && \
+    cmake --build build/ --target install
+
+RUN git clone https://github.com/darrylwest/quickkv.git quickkv && \
+    cd quickkv && cmake -B build . && \
+    cmake --build build/ --target install
 
 # --- Clean up to reduce image size ---
 # These are build artifacts from the base image, safe to remove here.
 RUN apt autoremove -y && \
     apt clean && \
-    rm -rf /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/* &&  \
+    rm -rf /opt/Catch2/ /opt/sockpp /opt/domain-keys /opt/termio /opt/money /opt/quickkv
 
 # -- copy in the root/.bashrc --
 COPY .bashrc /root/.bashrc

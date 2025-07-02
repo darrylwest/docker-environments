@@ -11,3 +11,5 @@ image=gcc14.2-debian12-dev
 docker stop $name
 docker rm $name
 
+docker image prune -af
+

@@ -14,15 +14,9 @@ make_project_folder() {
 install_projects() {
     make_project_folder
 
-    git clone https://github.com/fpagliughi/sockpp.git
-
-    git clone git@github.com:darrylwest/cpp-termio.git
-    git clone git@github.com:darrylwest/cpp-money.git money
-    git clone git@github.com:darrylwest/quickkv.git quickkv
-    git clone git@github.com:darrylwest/cpp-domain-keys.git domain-keys
-    git clone git@github.com:darrylwest/cpp-tcp-db.git tcp-db
-    git clone git@github.com:darrylwest/cpp-tiny-app-starter.git tiny-app-starter
-    git clone git@github.com:darrylwest/web-app-starter.git
+    # git@github.com:darrylwest/cpp-tcp-db.git tcp-db
+    # git@github.com:darrylwest/cpp-tiny-app-starter.git tiny-app-starter
+    git clone git@github.com:darrylwest/web-app-starter.git && cd web-app-starter && git co develop
 }
 
 install_rust() {

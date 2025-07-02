@@ -17,8 +17,8 @@ docker run --name $name \
     --detach \
     "$IMAGE:latest"
 
-sleep 2
-docker ps | fgrep debian-gcc
+sleep 4
+docker ps | fgrep $name 
 
-sleep 2
+sleep 1
 ./copy-env
