@@ -10,36 +10,31 @@ make_project_folder() {
   cd ~/c-projects
 }
 
+# TODO move all of this to Dockerfile
 install_projects() {
     make_project_folder
 
-    git clone https://github.com/fpagliughi/sockpp.git
-
-    git clone git@github.com/darrylwest/cpp-termio.git termio
-    git clone git@github.com/darrylwest/cpp-money.git money
-    git clone git@github.com:darrylwest/quickkv.git
-    git clone git@github.com/darrylwest/quickkv.git quickkv
-    git clone git@github.com:darrylwest/cpp-domain-keys.git domain-keys
-    git clone git@github.com:darrylwest/cpp-tcp-db.git tcp-db
-    git clone git@github.com:darrylwest/cpp-tiny-app-starter.git tiny-app-starter
-    git clone git@github.com:darrylwest/web-app-starter.git
+    # git@github.com:darrylwest/cpp-tcp-db.git tcp-db
+    # git@github.com:darrylwest/cpp-tiny-app-starter.git tiny-app-starter
+    git clone git@github.com:darrylwest/web-app-starter.git && cd web-app-starter && git co develop
 }
 
 install_rust() {
-  curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh -s -- -y
-  cargo --version
+    [ -x ~/.cargo/bin/cargo ] || {
+        curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh -s -- -y
+        ~/.cargo/bin/cargo --version
+    }
 }
 
 install_rust_binaries() {
-  cargo install lsd
-  cargo install bat
+    [ -x ~/.cargo/bin/lsd ] || cargo install lsd
+    [ -x ~/.cargo/bin/bat ] || cargo install bat
 }
 
-install_rust
 export PATH="~/.cargo/bin:$PATH"
+
+install_rust
 install_rust_binaries
+install_projects
 
-# install_projects
-
-exit $?
 

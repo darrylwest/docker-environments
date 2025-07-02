@@ -9,7 +9,7 @@ name=gcc14.2-debian-12-dev
 image=gcc14.2-debian12-dev
 export DOCKER_REPO=darrylwest
 export IMAGE=${DOCKER_REPO}/$image
-# export VSN=$(cat version)
+export VSN=$(cat version)
 
 # no volumes, all source is in the container
 docker run --name $name \
@@ -17,8 +17,8 @@ docker run --name $name \
     --detach \
     "$IMAGE:latest"
 
-sleep 2
-docker ps | fgrep debian-gcc
+sleep 4
+docker ps | fgrep $name 
 
-sleep 2
+sleep 1
 ./copy-env

@@ -5,7 +5,14 @@
 
 set -eu
 
-export name=gcc14.2-debian-12-dev
-echo "attaching to $name as $USER user"
+export usr=$USER
 
-docker exec -it -u $USER $name bash -l
+if [ "$USER" != "root" ]
+then
+    export usr=dpw
+fi
+
+export name=gcc14.2-debian-12-dev
+echo "attaching to $name as user: $usr"
+
+docker exec -it -u $usr $name bash -l

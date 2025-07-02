@@ -19,6 +19,6 @@ time docker build --no-cache \
     -t $IMAGE:$VERSION-$BUILD \
     -t $IMAGE:latest .
 
+echo $VERSION > version
 echo "If all goes well, then do this..."
-echo "docker push ${IMAGE}:${VERSION}-${BUILD}"
-echo "docker push ${IMAGE}:latest"
+echo "docker push ${IMAGE}:${VERSION}-${BUILD} && docker push ${IMAGE}:latest"
