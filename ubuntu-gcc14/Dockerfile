@@ -1,7 +1,7 @@
 # Use the official Ubuntu 24.10 oracular
 FROM ubuntu:oracular
 
-LABEL maintainer="darryl west" version="25.07.01-100"
+LABEL maintainer="darryl west" version="25.07.04-105"
 
 # Set environment variables for non-interactive installation
 ENV DEBIAN_FRONTEND=noninteractive
@@ -17,13 +17,16 @@ RUN apt update && \
     libmpfr-dev libmpc-dev flex bison texinfo curl wget uuid-dev python3-dev libstdc++6 locales openssh-client \
     xz-utils git vim neovim ninja-build fswatch openssl libssl-dev iputils-ping jq libsodium-dev libncurses-dev \
     nlohmann-json3-dev procps ca-certificates gnupg software-properties-common \
-    gcc-14 g++-14
+    gcc-14 g++-14 nodejs npm
 
 # --- Download and extract CMake binary ---
 RUN wget https://github.com/Kitware/CMake/releases/download/v3.31.6/cmake-3.31.6-linux-x86_64.sh && \
     chmod a+x cmake-3.31.6-linux-x86_64.sh && \
     ./cmake-3.31.6-linux-x86_64.sh --skip-license --prefix=/usr/local && \
     rm cmake-3.31.6-linux-x86_64.sh
+
+# install the AI
+RUN npm install -g @google/gemini-cli
 
 # Set the locale in the environment (this breaks)
 RUN echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen && \
