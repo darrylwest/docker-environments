@@ -25,9 +25,6 @@ RUN wget https://github.com/Kitware/CMake/releases/download/v3.31.6/cmake-3.31.6
     ./cmake-3.31.6-linux-x86_64.sh --skip-license --prefix=/usr/local && \
     rm cmake-3.31.6-linux-x86_64.sh
 
-# install the AI
-RUN npm install -g @google/gemini-cli
-
 # Set the locale in the environment (this breaks)
 RUN echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen && \
     locale-gen en_US.UTF-8 && \
@@ -36,6 +33,9 @@ RUN echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen && \
 
 # Verify the installed GCC version
 RUN gcc --version && cmake --version
+
+# install the AI
+RUN npm install -g @google/gemini-cli && npm install -g @anthropic-ai/claude-code
 
 # --- Catch2 build ---
 WORKDIR /opt
