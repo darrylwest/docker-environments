@@ -17,7 +17,7 @@ RUN apt update && \
     libmpfr-dev libmpc-dev flex bison texinfo curl wget uuid-dev python3-dev libstdc++6 locales openssh-client \
     xz-utils git vim neovim ninja-build fswatch openssl libssl-dev iputils-ping jq libsodium-dev libncurses-dev \
     nlohmann-json3-dev procps ca-certificates gnupg software-properties-common \
-    gcc-14 g++-14 nodejs npm
+    gcc-14 g++-14 nodejs npm clang-format-18
 
 # --- Download and extract CMake binary ---
 RUN wget https://github.com/Kitware/CMake/releases/download/v3.31.6/cmake-3.31.6-linux-x86_64.sh && \
